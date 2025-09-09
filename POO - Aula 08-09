@@ -1,0 +1,88 @@
+using System;
+
+public class Televisao
+{
+    private int canalAtual;
+    private int volumeAtual;
+    private bool mudo;
+
+    public Televisao()
+    {
+        canalAtual = 1;
+        volumeAtual = 10;
+        mudo = false;
+    }
+
+    public int ObterCanalAtual()
+    {
+        return canalAtual;
+    }
+
+    public int ObterVolumeAtual()
+    {
+        return mudo ? 0 : volumeAtual;
+    }
+
+    public void MudarParaCanal(int canal)
+    {
+        if (canal >= 1 && canal <= 100)
+        {
+            canalAtual = canal;
+        }
+    }
+
+    public void SubirCanal()
+    {
+        if (canalAtual < 100)
+            canalAtual++;
+        else
+            canalAtual = 1;
+    }
+
+    public void AumentarVolume()
+    {
+        if (!mudo && volumeAtual < 100)
+        {
+            volumeAtual++;
+        }
+    }
+
+    public void AlternarMudo()
+    {
+        mudo = !mudo;
+    }
+
+    public bool EstaMudo()
+    {
+        return mudo;
+    }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Televisao minhaTv = new Televisao();
+
+        Console.WriteLine("Canal inicial: " + minhaTv.ObterCanalAtual());
+        Console.WriteLine("Volume inicial: " + minhaTv.ObterVolumeAtual());
+
+        minhaTv.MudarParaCanal(10);
+        Console.WriteLine("Canal após mudar para 10: " + minhaTv.ObterCanalAtual());
+
+        minhaTv.SubirCanal();
+        Console.WriteLine("Canal após subir: " + minhaTv.ObterCanalAtual());
+
+        minhaTv.AumentarVolume();
+        minhaTv.AumentarVolume();
+        Console.WriteLine("Volume após aumentar 2 vezes: " + minhaTv.ObterVolumeAtual());
+
+        minhaTv.AlternarMudo();
+        Console.WriteLine("Mudo ativado? " + minhaTv.EstaMudo());
+        Console.WriteLine("Volume após mudo: " + minhaTv.ObterVolumeAtual());
+
+        minhaTv.AlternarMudo();
+        Console.WriteLine("Mudo ativado? " + minhaTv.EstaMudo());
+        Console.WriteLine("Volume após desativar mudo: " + minhaTv.ObterVolumeAtual());
+    }
+}
